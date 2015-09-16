@@ -1,0 +1,17 @@
+<header>
+  <h1>Igor's Blog</h1>
+</header>
+
+<div>
+  {{#link-to 'index'}}<img class="logo">{{/link-to}}
+  <nav>
+    {{#link-to 'about'}}About{{/link-to}}
+    {{#link-to 'favorites'}}Favorites{{/link-to}}
+  </nav>
+
+  {{outlet}}
+</div>
+
+<footer>
+  &copy;2013 Igor's Publishing, Inc.
+</footer>

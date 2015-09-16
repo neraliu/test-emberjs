@@ -1,0 +1,78 @@
+<!--
+
+| Context 			| Contextual Filtering 	|
+---------------------------------------------------------
+| HTML				| Yes			|
+| Comment			| No data binding 	|
+| Attr Name			| Broken		|
+
+| Double Quoted Attr Value	| Yes			|
+| Single Quoted Attr Value	| Yes			|
+| UnQuoted Attr Value		| Yes			|
+
+| Quoted Attr Value / CSS	| No			|
+| Quoted Attr Value / URI	| Yes			|
+
+| <script> tag			| No			|
+| <style> tag			| No			|
+
+-->
+<!-- basic 
+result: filtering as expected.
+-->
+<div>{{data}}</div>
+
+<!-- comment 
+result: it regards as comment, there is no data binding.
+-->
+<!-- {{data}} -->
+
+<!-- attribute name
+result: emberjs throws error and stop the execution.
+<div {{data}}>{{data}}</div>
+-->
+
+<!-- double-quoted attribute value
+result: filtering as expected.
+-->
+<div class="{{data}}">{{data}}</div>
+
+<!-- single-quoted attribute value 
+result: rewrite into double-quoted and then filtering applied.
+-->
+<div class='{{data}}'>{{data}}</div>
+
+<!-- un-quoted attribute value
+result: rewrite into double-quoted and then filtering applied.
+-->
+<div class={{data}}>{{data}}</div>
+
+<!-- double-quoted attribute value / CSS
+result: x:expression(alert(0)); can be injected, no CSS filtering rules
+-->
+<div style="{{data}}">{{data}}</div>
+
+<!-- double-quoted attribute value / CSS 
+result: x:expression(alert(0)); can be injected, no CSS filtering rules
+-->
+<div style="color:{{data}}">{{data}}</div>
+
+<!-- double-quoted attribute value / URI 
+result: a prefix unsafe: will be injected in front of untrusted input
+-->
+<a href="{{data}}">link</a>
+
+<!-- double-quoted attribute value / URI 
+result: a prefix unsafe: will be injected in front of untrusted input
+-->
+<a href="javascript:alert('{{data}}')">link</a>
+
+<!-- script context
+result: script can be injected
+-->
+<script>{{data}}</script>
+
+<!-- style context 
+result: no specific filtering rules ['"<>&;{}:]
+-->
+<style>{{data}}</style>
