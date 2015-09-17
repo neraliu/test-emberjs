@@ -10,7 +10,7 @@ export default Ember.Route.extend({
     controller.set('data', '<> "\'&'); // with space
     controller.set('data', 'javascript:alert(0)'); // for URI
     controller.set('data', 'x:expression(alert(0));'); // for CSS
-    controller.set('data', ';:[]{}'); // for CSS
+    controller.set('data', ';:[]{}()'); // for CSS
     */
   }
 });
